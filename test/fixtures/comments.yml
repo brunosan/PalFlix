@@ -1,8 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  commenter: MyString
-  body: MyText
+espoiler:
+  commenter: Bruno
+  body: At the end he dies
   movie: 
 
 two:

@@ -1,15 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  title: MyString
-  pal: MyString
-  rating: 1
-  comment: MyText
-  link: MyString
+Gladiator:
+  title: Gladiator
+  pal: bruno
+  rating: 10
+  comment: Nice movie and soundtrack
+  link: #
 
-two:
-  title: MyString
-  pal: MyString
-  rating: 1
-  comment: MyText
-  link: MyString
+Goonies:
+  title: The Goonies
+  pal: Antonio
+  rating: 8
+  comment: Classic
+  link: #
