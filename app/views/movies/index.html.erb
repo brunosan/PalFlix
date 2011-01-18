@@ -11,8 +11,8 @@
 
 <% @movies.each do |movie| %>
   <tr>
-    <td><%= link_to movie.title, movie %></td>
-    <td><%= movie.pal %></td>
+    <td><%= link_to truncate(movie.title,:length => 20, :omission =>"..."), movie %></td>
+    <td><%= truncate(movie.pal,:length => 12, :omission =>"...") %></td>
     <td><%= movie.rating %></td>
     <td><%= movie.comments.count %></td>
     <td><%= link_to '[x]', movie, :confirm => 'Deleting entry. Are you sure?', :method => :delete %></td>
