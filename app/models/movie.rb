@@ -1,4 +1,5 @@
 class Movie < ActiveRecord::Base
+  default_scope :order => 'rating DESC'
 
   validates :title, :presence => true
   validates :pal, :presence => true
