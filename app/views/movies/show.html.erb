@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<h2>"<%= @movie.title %>"</h2> <%= link_to 'Edit entry', edit_movie_path(@movie) %>
+
+<p>
+  <b>Pal:</b>
+  <%= @movie.pal %>
+</p>
+
+<p>
+  <b>Rating:</b>
+  <%= @movie.rating %>
+</p>
+
+<p>
+  <b>Review:</b>
+  <%= @movie.comment %>
+</p>
+
+<p>
+  <b>Link:</b>
+  <%= @movie.link %>
+  </p>
+
+  <h2>Comments</h2>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Comment</th>
+    <th></th>
+  </tr>
+
+<% @movie.comments.each do |comment| %>
+  <tr>
+    <td><%= comment.commenter %></td>
+    <td><%= comment.body %></td>
+    <td>[<%= link_to 'Delete', [comment.movie, comment],
+               :confirm => 'Are you sure?',
+               :method => :delete %>]</td>
+  </tr>
+<% end %>
+</table>
+
+<h2>Add your comment:</h2>
+<%= form_for([@movie, @movie.comments.build]) do |f| %>
+  <div class="field">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Comment</th>
+      </tr>
+      <tr>
+        <td><%= f.text_field :commenter %></td>
+        <td><%= f.text_field :body, :rows => 1, :value => 'I like it too.' %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+
+Go <%= link_to 'back', movies_path %> to all movies
