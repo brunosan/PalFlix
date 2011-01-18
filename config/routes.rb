@@ -1,4 +1,8 @@
 PalFlix::Application.routes.draw do
+  get "pages/home"
+
+  get "pages/contact"
+
   resources :movies do
     resources :comments
   end
@@ -6,7 +10,7 @@ PalFlix::Application.routes.draw do
 
   #get "home/index"
 
-  root :to => 'home#index'
+  root :to => 'pages#home'
 
 
   # The priority is based upon order of creation:
