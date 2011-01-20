@@ -70,7 +70,7 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #993333;
 }
 
 nav ul li a:hover {
@@ -112,4 +112,31 @@ a.signup_button {
   -webkit-border-radius: 10px;
   border-radius:         10px;
 }
+
+/* User show page */
+
+table.profile {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+td.main {
+  width: 60%;
+  padding: 1em;
+}
+
+td.sidebar {
+  border: 2px solid black;
+  width: 30%;
+  padding: 1em;
+  vertical-align: top;
+  background: white;
+  margin-right: auto;
+}
+
+.profile img.gravatar {
+  border: 1px solid #999;
+  margin-bottom: -15px;
+}
+
 
