@@ -8,7 +8,9 @@ describe "GET 'index'" do
     describe "for non-signed-in users" do
       it "should be successful" do
         get :index
-        response.should be_success
+        response.should redirect_to(signin_path)
+        flash[:notice].should =~ /sign in/i
+        
       end
     end
 
