@@ -3,10 +3,6 @@ class SessionsController < ApplicationController
      @title = "Sign in"
   end
 
- def create
-   render 'new'
- end
-
   def destroy
     sign_out
     redirect_to root_path
@@ -21,7 +17,7 @@ class SessionsController < ApplicationController
       render 'new'
     else
       sign_in user
-      redirect_to user
+      redirect_back_or user
       
     end
   end

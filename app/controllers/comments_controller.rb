@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
 
-  before_filter :authenticate, :only => [:destroy]
 
 def create
     @movie = Movie.find(params[:movie_id])
