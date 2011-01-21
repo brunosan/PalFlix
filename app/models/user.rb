@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password
 
+
+  cattr_reader :per_page
+  @@per_page = 10
+
+
   # Return true if the user's password matches the submitted password.
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
