@@ -1,7 +1,15 @@
 PalFlix::Application.routes.draw do
+  root :to => 'pages#home'
+  
   resources :users
   match '/signup', :to => 'users#new'
   
+  resources :sessions, :only => [:new, :create, :destroy]
+  match '/signup',  :to => 'users#new'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+
+
   get "pages/home"
   get "pages/contact"
   get "pages/about"
@@ -13,7 +21,6 @@ PalFlix::Application.routes.draw do
   end
   
 
-  root :to => 'pages#home'
 
 
   # The priority is based upon order of creation:
