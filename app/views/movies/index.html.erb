@@ -1,25 +1,9 @@
-<h1>Listing movies</h1>
+<h1><%= @movies_total%> movies aboard</h1>
 
+<h4>Can´t find it? Add a <%= link_to "new movie", :controller => "movies", :action => 'new', :class=> "signup_button round"%></h4>
+<%= page_entries_info @movies %> <%= will_paginate %>
 <table>
-  <tr>
-    <th>Title</th>
-    <th>Pal</th>
-    <th>Rating</th>
-    <th>Comments</th>
-    <th></th>
-  </tr>
+    <%= render @movies %>  
+</table
+<%= will_paginate %>
 
-<% @movies.each do |movie| %>
-  <tr>
-    <td><%= link_to truncate(movie.title,:length => 20, :omission =>"..."), movie %></td>
-    <td><%= truncate(movie.pal,:length => 12, :omission =>"...") %></td>
-    <td><%= movie.rating %></td>
-    <td><%= movie.comments.count %></td>
-    <td><%= link_to '[x]', movie, :confirm => 'Deleting entry. Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Movie', new_movie_path %>

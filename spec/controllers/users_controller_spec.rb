@@ -6,7 +6,7 @@ describe UsersController do
 describe "GET 'index'" do
 
     describe "for non-signed-in users" do
-      it "should be successful" do
+      it "should not be successful" do
         get :index
         response.should redirect_to(signin_path)
         flash[:notice].should =~ /sign in/i
@@ -34,14 +34,7 @@ describe "GET 'index'" do
 
       it "should have the right title" do
         get :index
-        response.should have_selector("title", :content => "All users")
-      end
-
-      it "should have an element for each user" do
-        get :index
-        @users.each do |user|
-          response.should have_selector("li", :content => user.name)
-        end
+        response.should have_selector("title", :content => "All Users")
       end
 
       it "should have an element for each user" do

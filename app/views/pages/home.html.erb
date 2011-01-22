@@ -1,4 +1,23 @@
 <h1>Hello Pal!</h1>
-<%= link_to "Movies PalFlix", movies_path %>
+
+<% if signed_in? %>
+  It´s been <%= time_ago_in_words(@last_login) %> since your last log out.
+  We missed you,  <%= current_user.name.split.first %>!
+<% else %>
+  <%= time_ago_in_words(@last_login) %> since the last Pal signed out. <%= link_to "Come in!", signin_path %>
+<% end %>
 <p>
-<%= link_to "Sign up to add your movies", signup_path, :class => "signup_button round" %>
+So far, we´ve got <%= @users_total %> <%= link_to "Pals", users_path %>, and <%= @movies_total %> <%= link_to "Movies", movies_path %>.
+
+<p>
+<% if signed_in? %>
+  You can: 
+  <ul>
+    <li>See current <%= link_to "movies", movies_path %> .
+    <li>Add a <%= link_to " new movie", :controller => "movies", :action => 'new'%>.
+    <li>Visit your <%= link_to "profile", current_user %>.
+  </ul>
+ <% else %>  
+   <%= link_to "Log in to add your movies", signin_path, :class => "signup_button round" %>
+   <strong> New user?</strong>, then <%=link_to "Join us", signup_path %>
+ <% end %>

@@ -1,85 +1,73 @@
 class MoviesController < ApplicationController
+ 
+before_filter :authenticate
+before_filter :admin_user,   :only => [:edit, :update, :destroy]
 
-
-  # GET /movies
-  # GET /movies.xml
-  def index
-    @movies = Movie.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @movies }
-    end
+def new
+    @title= "Add Movie"
+    @movie=Movie.new
   end
 
-  # GET /movies/1
-  # GET /movies/1.xml
   def show
-    @movie = Movie.find(params[:id])
+    @movie=Movie.find(params[:id])
+    @title= @movie.title
+  end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @movie }
+  def create
+    @movie= Movie.new(params[:movie])
+    if @movie.save
+      flash[:success] = "The Movie '#{@movie.title}' is now safe with us."
+      redirect_to @movie
+    else
+      flash[:error] = "Something went wrong, sorry. Try it again."
+      @title="New Movie"
+      render 'new'
     end
   end
 
-  # GET /movies/new
-  # GET /movies/new.xml
-  def new
-    @movie = Movie.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @movie }
-    end
-  end
-
-  # GET /movies/1/edit
   def edit
     @movie = Movie.find(params[:id])
+    @title = "Edit movie"
   end
-
-  # POST /movies
-  # POST /movies.xml
-  def create
-    @movie = Movie.new(params[:movie])
-
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to(@movie, :notice => 'Movie was successfully created.') }
-        format.xml  { render :xml => @movie, :status => :created, :location => @movie }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @movie.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /movies/1
-  # PUT /movies/1.xml
+ 
   def update
     @movie = Movie.find(params[:id])
-
-    respond_to do |format|
-      if @movie.update_attributes(params[:movie])
-        format.html { redirect_to(@movie, :notice => 'Movie was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @movie.errors, :status => :unprocessable_entity }
-      end
+    if @movie.update_attributes(params[:movie])
+      flash[:success] = "Movie info updated."
+      redirect_to @movie
+    else
+      flash[:error] = "Something went wrong, sorry. Try it again."
+      @title = "Edit movie"
+      render 'edit'
     end
   end
-
-  # DELETE /movies/1
-  # DELETE /movies/1.xml
-  def destroy
-    @movie = Movie.find(params[:id])
-    @movie.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(movies_url) }
-      format.xml  { head :ok }
-    end
+  
+  def index
+    @title = "All Movies"
+    @movies = Movie.paginate(:page => params[:page])
+    @movies_total = Movie.count
   end
+
+def destroy
+    Movie.find(params[:id]).destroy
+    flash[:success] = "Movie deleted."
+    redirect_to movies_path
+  end
+  
+ 
+private
+
+def authenticate
+      deny_access unless signed_in?
+end
+
+private
+
+def admin_user
+  unless current_user.admin?
+      flash[:error] = "Sorry, only admins can do that."
+      redirect_back_or(movies_path)
+  end
+end
+
 end

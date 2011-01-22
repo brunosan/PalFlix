@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
       render 'new'
     else
       sign_in user
-      redirect_back_or user
+      current_user.touch
+      redirect_back_or movies_path
       
     end
   end

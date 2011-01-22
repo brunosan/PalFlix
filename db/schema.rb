@@ -22,9 +22,6 @@ ActiveRecord::Schema.define(:version => 20110121163952) do
 
   create_table "movies", :force => true do |t|
     t.string   "title"
-    t.string   "pal"
-    t.integer  "rating"
-    t.text     "comment"
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"

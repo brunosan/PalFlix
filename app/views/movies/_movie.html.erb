@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to movie.title, movie %>
+  <% if current_user.admin? %>
+    | <%= link_to "x", movie, :method => :delete, :confirm => "Deleting movie #{movie.title}, You sure?" %>
+  <% end %></td>
+</tr>

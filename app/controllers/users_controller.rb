@@ -45,14 +45,11 @@ before_filter :admin_user,   :only => :destroy
   end
   
   def index
-    @title = "All users"
+    @title = "All Users"
     @users = User.paginate(:page => params[:page])
+    @users_total = User.count
   end
 
-  def show
-    @user = User.find(params[:id])
-    @title = @user.name
-  end
  
 def destroy
     User.find(params[:id]).destroy

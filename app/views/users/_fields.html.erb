@@ -1,0 +1,27 @@
+  <%= render 'shared/error_messages', :object => f.object %>
+<table >
+  <tr>
+  <div class="field">
+    <td> <%= f.label :name %></td>
+    <td><%= f.text_field :name %></td>
+  </div>
+</tr>
+<tr>
+  <div class="field">
+    <td>  <%= f.label :email %> </td>
+    <td><%= f.text_field :email %></td>
+  </div>
+</tr>
+<tr>
+  <div class="field">
+    <td><%= f.label :password %>
+    <td><%= f.password_field :password %>
+  </div>
+</tr>
+<tr>
+  <div class="field">
+    <td><%= f.label :password_confirmation, "Password Confirmation" %></td>
+    <td><%= f.password_field :password_confirmation %></td>
+  </div>
+</td>
+</table>

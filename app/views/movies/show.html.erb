@@ -1,67 +1,24 @@
-<p id="notice"><%= notice %></p>
-
-<h2>"<%= @movie.title %>"</h2> <%= link_to 'Edit entry', edit_movie_path(@movie) %>
-
-<p>
-  <b>Pal:</b>
-  <%= @movie.pal %>
-</p>
-
-<p>
-  <b>Rating:</b>
-  <%= @movie.rating %>
-</p>
-
-<p>
-  <b>Review:</b>
-  <%= @movie.comment %>
-</p>
-
-<p>
-  <b>Link:</b>
-  <%= @movie.link %>
-  </p>
-
-  <h2>Comments</h2>
- 
-<table>
+<table class="profile" summary="Movie information">
   <tr>
-    <th>Name</th>
-    <th>Comment</th>
-    <th></th>
+    <td class="main">
+      <h1>
+        "<%= @movie.title %>"
+      </h1>
+    </td>
+    <td class="sidebar round">
+      <strong>Title</strong>: <%= truncate(@movie.title,:length => 20) %><br />
+      <strong>URL</strong>:  <%= link_to movie_path(@movie), @movie %><br />
+      <strong>Added</strong> <%= time_ago_in_words(@movie.created_at) %> ago.<br />
+      <strong>Ratings</strong>: 0<br />
+      <strong>Average rating</strong>: 0<br />
+      <% if current_user.admin? %>
+        admin=> <%= link_to "Delete", @movie, :method => :delete, :confirm => "Deleting movie #{@movie.title}, You sure?" %><br />
+        admin=> <%= link_to "Edit", edit_movie_path(@movie) %>
+      <% else %>
+        <%= mail_to "PalFlix@brunosan.eu", name= "Request edit", :subject => "Edit request for '#{@movie.title}'", :body => "#{movie_url(@movie)} \n Please specify suggested edit.\n Thanks!" %><br />
+        <%= mail_to "PalFlix@brunosan.eu", name= "Request delete", :subject => "Delete request for '#{@movie.title}'", :body => "#{movie_url(@movie)} \n Please specify reason to delete.\n Thanks" %>
+      <% end %>
+    </td>
   </tr>
-
-<% @movie.comments.each do |comment| %>
-  <tr>
-    <td><%= comment.commenter %></td>
-    <td><%= comment.body %></td>
-    <td>[<%= link_to 'Delete', [comment.movie, comment],
-               :confirm => 'Are you sure?',
-               :method => :delete %>]</td>
-  </tr>
-<% end %>
 </table>
 
-<h2>Add your comment:</h2>
-<%= form_for([@movie, @movie.comments.build]) do |f| %>
-  <div class="field">
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Comment</th>
-      </tr>
-      <tr>
-        <td><%= f.text_field :commenter %></td>
-        <td><%= f.text_field :body, :rows => 1, :value => 'I like it too.' %></td>
-      </tr>
-    </table>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-
-
-
-Go <%= link_to 'back', movies_path %> to all movies

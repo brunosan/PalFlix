@@ -19,6 +19,7 @@ group :test do
   gem 'webrat'
   gem 'spork'
   gem 'factory_girl_rails'
+  #gem 'guard-spork'
 end
 
 

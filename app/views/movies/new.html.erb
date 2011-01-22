@@ -1,5 +1,10 @@
-<h1>New movie</h1>
+<h1>Add a movie</h1>
 
-<%= render 'form' %>
+<%= form_for(@movie) do |f| %>
+  <%= render 'fields', :f => f %>
 
-<%= link_to 'Back', movies_path %>
+  <div class="actions">
+    <%= f.submit "Add movie" %>
+  </div>
+<% end %>
+
