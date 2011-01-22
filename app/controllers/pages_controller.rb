@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     @movies_total = Movie.count
     @user_last = User.last
     @movie_last = Movie.last
-    @last_login=User.find(:first, :order => "updated_at ASC", :limit => 1).updated_at
+    @last_login=5.minutes.ago
   end
 
   def contact

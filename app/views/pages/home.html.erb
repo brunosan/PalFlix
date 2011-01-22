@@ -14,7 +14,7 @@ So far, we´ve got <%= @users_total %> <%= link_to "Pals", users_path %>, and <%
   You can: 
   <ul>
     <li>See current <%= link_to "movies", movies_path %> .
-    <li>Add a <%= link_to " new movie", :controller => "movies", :action => 'new'%>.
+    <li>Add a <%= link_to " new movie", new_movie_path %>.
     <li>Visit your <%= link_to "profile", current_user %>.
   </ul>
  <% else %>  

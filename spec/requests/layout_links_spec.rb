@@ -30,8 +30,6 @@ visit root_path
     response.should have_selector('title', :content => "Contact")
     click_link "Home"
     response.should have_selector('title', :content => "Home")
-    click_link "Sign up"
-    response.should have_selector('title', :content => "Sign up")
   end   
 
 describe "when not signed in" do

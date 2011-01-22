@@ -19,7 +19,6 @@ PalFlix::Application.routes.draw do
   resources :movies do
     resources :comments
   end
-  match '/newmovie', :to => 'movies#new'
   
 
 

@@ -1,6 +1,6 @@
 <h1><%= @movies_total%> movies aboard</h1>
 
-<h4>Can´t find it? Add a <%= link_to "new movie", :controller => "movies", :action => 'new', :class=> "signup_button round"%></h4>
+<h4>Can´t find it? Add a <%= link_to "new Movie", new_movie_path%></h4>
 <%= page_entries_info @movies %> <%= will_paginate %>
 <table>
     <%= render @movies %>  
