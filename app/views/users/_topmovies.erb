@@ -1,0 +1,3 @@
+<% @rating_best.each do |best|%>
+  <li>"<%= link_to best.movie.title, best.movie %>" (<strong><%=best.grade%></strong> points)
+<% end %>

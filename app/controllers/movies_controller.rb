@@ -11,6 +11,8 @@ def new
   def show
     @movie=Movie.find(params[:id])
     @title= @movie.title
+    @rating_best= @movie.ratings.find(:all, :order => "grade", :limit => 3)
+    @ratings= @movie.ratings.paginate(:page => params[:page])
   end
 
   def create

@@ -7,7 +7,9 @@
   <%= time_ago_in_words(@last_login) %> since the last Pal signed out. <%= link_to "Come in!", signin_path %>
 <% end %>
 <p>
-So far, we´ve got <%= @users_total %> <%= link_to "Pals", users_path %>, and <%= @movies_total %> <%= link_to "Movies", movies_path %>.
+So far, we´ve got <%= @users_total %> <%= link_to "Pals", users_path %>
+, <%= @ratings_total %> ratings
+, and <%= @movies_total %> <%= link_to "Movies", movies_path %>.
 
 <p>
 <% if signed_in? %>

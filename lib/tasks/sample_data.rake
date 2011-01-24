@@ -31,6 +31,23 @@ namespace :db do
                     :link => 'x')
 
     end
+
+    50.times do
+      total_users=User.count
+      user=User.find(rand(total_users))
+      total_movies=Movie.count
+      20.times do
+        user.ratings.create(:grade => rand(10), :movie_id =>rand(total_movies))
+      end
+    end
+
+    #Movie.all(:limit => 5).each do |movie|
+    #  total_users=User.count
+    #  20.times do
+    #    movie.ratings.create(:grade => rand(10), :user_id =>rand(total_users))
+    #  end
+    #end
+
   end
 end
 

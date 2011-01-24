@@ -21,6 +21,8 @@ PalFlix::Application.routes.draw do
   end
   
 
+  match "/ratings", :to => "ratings#index"
+
 
 
   # The priority is based upon order of creation:

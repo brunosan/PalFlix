@@ -12,6 +12,8 @@ group :development do
   gem 'rspec-rails'
   gem 'annotate-models'
   gem 'faker'
+  gem 'growl'
+  gem 'ruby-debug'
 end
 
 group :test do
@@ -19,7 +21,10 @@ group :test do
   gem 'webrat'
   gem 'spork'
   gem 'factory_girl_rails'
-  #gem 'guard-spork'
+  gem 'rb-fsevent'
+  gem 'guard'
+  gem 'growl'
+  gem 'guard-spork'
 end
 
 

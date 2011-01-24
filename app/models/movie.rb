@@ -1,5 +1,8 @@
 class Movie < ActiveRecord::Base
 
+  has_many :ratings, :dependent => :destroy
+  has_many :users, :through => :ratings
+
   default_scope :order => 'movies.created_at DESC'
 
   validates :title, :presence => true,

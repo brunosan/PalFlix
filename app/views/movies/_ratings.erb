@@ -1,0 +1,10 @@
+<% @ratings.each do |rating| %> 
+<tr>
+  <td class="rating">
+  <span class="grade"><strong><%= rating.grade %></strong> from <%= link_to rating.user.name.split.first, rating.user%></span>
+      <span class="timestamp"> Rated <%= time_ago_in_words(rating.created_at) %> ago. </span>
+  </td>
+</tr>
+
+<% end %>
+

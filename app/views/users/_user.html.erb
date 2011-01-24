@@ -8,5 +8,6 @@
   <% if current_user.admin? %>
     | <%= link_to "x", user, :method => :delete, :confirm => "Deleting user #{user.name}, You sure?" %>
   <% end %>
+  | <%= user.ratings.count %> Movies rated.
   
 </li>

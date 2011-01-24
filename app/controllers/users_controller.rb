@@ -12,6 +12,8 @@ before_filter :admin_user,   :only => :destroy
   def show
     @user=User.find(params[:id])
     @title= @user.name.split.first
+    @rating_best=@user.ratings.find(:all, :order => "grade", :limit => 3)
+    @ratings=@user.ratings.paginate(:page => params[:page])
   end
 
   def create

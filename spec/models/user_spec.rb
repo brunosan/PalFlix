@@ -131,6 +131,30 @@ describe User do
       @user.should be_admin
     end
   end
-  
+ 
+  describe "rating associations" do
+
+    before(:each) do
+      @user = User.create(@attr)
+      @movie = Movie.create(:title => "lolailo")
+      @r1 = Factory(:rating, :user => @user, :movie => @movie, :created_at => 1.day.ago)
+      @r2 = Factory(:rating, :user => @user, :movie => @movie,  :created_at => 1.hour.ago)
+    end
+
+    it "should have a ratings attribute" do
+      @user.should respond_to(:ratings)
+    end
+
+    it "should have the right ratings in the right order" do
+      @user.ratings.should == [@r2, @r1]
+    end
+
+    it "should destroy associated ratings" do
+      @movie.destroy
+      [@r1,@r2].each do |rating|
+        Rating.find_by_id(rating.id).should be_nil
+      end
+    end
+  end
   
 end

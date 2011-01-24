@@ -5,10 +5,27 @@
         <%= gravatar_for @user %>
         <%= @user.name.split.first %>
       </h1>
-    </td>
+      <p>
+      <% unless @user.ratings.empty? %>
+        <h4>Top <%= @rating_best.count %> movies for  <%= @user.name.split.first %> </h4>
+          <ol>
+            <%= render "topmovies", :collection => @rating_best %>
+          </ol>
+          <h4> All Ratings </h4>
+          <table class="ratings">
+            <%= render "ratings", :collection=> @ratings %>
+      </table>
+      <%= will_paginate @ratings %>
+    <%else %>
+      <p>
+      Has no ratings so far.
+    <% end %>
+  </td>
+    
     <td class="sidebar round">
       <strong>Name</strong> <%= @user.name %><br />
       <strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
+      <strong>Ratings</strong> <%= @user.ratings.count %>
       <% if @user == current_user   %>
         <strong><%= link_to "Edit your profile", edit_user_path(@user) %></strong> 
       <% end %>

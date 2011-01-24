@@ -19,4 +19,9 @@ Factory.sequence :title do |n|
   "Rocky #{n}"
 end
 
+Factory.define :rating do |rating|
+  rating.grade 5
+  rating.association :user
+  rating.association :movie
+end
 

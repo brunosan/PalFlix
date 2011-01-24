@@ -5,10 +5,23 @@
         "<%= @movie.title %>"
       </h1>
       <p>
-      Has no ratings no far.
-      <p>
-      Take a look to <%= link_to "all the Movies", movies_path %> we´ve got.<br/>
-Add perhaps another <%= link_to " Movie", new_movie_path%>
+      <% unless @movie.ratings.empty? %>
+        <h4>Top <%= pluralize(@rating_best.count, "rater") %>: </h4> 
+        <ol>
+        <% @rating_best.each do |best|%>
+          <li><%= best.user.name%> with <%= best.grade %> point.
+          <% end %>
+         </ol>
+         <h4> We got <%= pluralize(@ratings.count, "rating")  %> so far: </h4>
+        <table class="ratings">
+          <%= render "ratings", :collection => @ratings %>
+        </table>
+        <%= will_paginate @ratings %>
+      <%else %>
+        Has no ratings no far.
+      <%end %>
+  </td>
+    
     </td>
     <td class="sidebar round">
       <strong>Title</strong>: <%= truncate(@movie.title,:length => 20) %><br />

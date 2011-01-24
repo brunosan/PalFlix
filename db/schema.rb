@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121163952) do
+ActiveRecord::Schema.define(:version => 20110122165834) do
 
   create_table "comments", :force => true do |t|
     t.string   "commenter"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(:version => 20110121163952) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "grade"
+    t.integer  "user_id"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["grade"], :name => "index_ratings_on_grade"
+  add_index "ratings", ["movie_id"], :name => "index_ratings_on_movie_id"
+  add_index "ratings", ["user_id", "movie_id"], :name => "index_ratings_on_user_id_and_movie_id", :unique => true
+  add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

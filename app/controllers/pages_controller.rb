@@ -3,6 +3,7 @@ class PagesController < ApplicationController
     @title = "Home"
     @users_total = User.count
     @movies_total = Movie.count
+    @ratings_total = Rating.count
     @user_last = User.last
     @movie_last = Movie.last
     @last_login=5.minutes.ago
