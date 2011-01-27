@@ -1,3 +1,9 @@
 <tr>
-  <td><%= "#{rating.user.name.split.first} rated \"#{rating.movie.title}\" with #{rating.grade} point." %>
+  <td class="rating">
+    <span class="grade">
+      <%= link_to rating.user.name.split.first, rating.user %> 
+      rated "<%= link_to rating.movie.title, rating.movie %>"
+      as <%= rating.to_text %> (<%= pluralize rating.grade, "point" %>)</span>
+  <span class="timestamp"> Rated <%= time_ago_in_words(rating.created_at) %> ago. </span>
+  </td>
     </td></tr>

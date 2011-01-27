@@ -1,7 +1,10 @@
 <% @ratings.each do |rating| %> 
 <tr>
   <td class="rating">
-  <span class="grade"><strong><%= rating.grade %></strong> for "<%= link_to rating.movie.title, rating.movie%>"</span>
+    <span class="grade">
+      "<%= link_to rating.movie.title, rating.movie%>"
+       is <strong><%= rating.to_text %> </strong>  
+    </span>
       <span class="timestamp"> Rated <%= time_ago_in_words(rating.created_at) %> ago. </span>
   </td>
 </tr>

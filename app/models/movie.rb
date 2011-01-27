@@ -3,7 +3,7 @@ class Movie < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :users, :through => :ratings
 
-  default_scope :order => 'movies.created_at DESC'
+  default_scope :order => 'movies.title ASC'
 
   validates :title, :presence => true,
                     :length   => { :within => 1..50},

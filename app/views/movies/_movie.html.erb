@@ -1,7 +1,19 @@
 <tr>
-  <td><%= link_to movie.title, movie %>
+  <td><%= link_to truncate(movie.title,:lenth =>55,:separator =>'...'), movie %>
   <% if current_user.admin? %>
     | <%= link_to "x", movie, :method => :delete, :confirm => "Deleting movie #{movie.title}, You sure?" %>
   <% end %>
-  | <%= movie.ratings.count %> ratings.</td>
+</td>
+<td>
+  <%= movie.ratings.count %> ratings.
+</td>
+<td>
+  <%  c=Rating.where('movie_id = ? AND user_id = ?',movie.id, current_user.id).all %>
+  <% if c.count == 1 %>
+    <%= c.first.to_text  %>
+  <% else %>
+    <strong>Add</strong> your rating
+  <% end %>
+
+</td>
 </tr>

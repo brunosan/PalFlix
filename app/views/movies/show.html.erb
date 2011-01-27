@@ -1,24 +1,41 @@
 <table class="profile" summary="Movie information">
   <tr>
     <td class="main">
-      <h1>
-        "<%= @movie.title %>"
-      </h1>
+      <h2>"<%= @movie.title %>"</h2>
       <p>
+      <h4> Your Rating: </h4>
+      <% if @current_user_rating.nil? %>
+        <%= form_for @rating do |r| %>
+          <div class="field">
+           <%= r.number_field :grade %>
+          </div>
+          <div class="field">
+            <%= r.hidden_field :movie_id, :value => @rating.movie.id %>
+          </div>
+          <div class="field">
+            <%= r.hidden_field :user_id, :value => @rating.user.id %>
+          </div>
+          <div class="actions">
+            <%= r.submit "Submit" %>
+          </div>
+       <% end %>
+          
+      <% else %>
+        <%= time_ago_in_words(@current_user_rating.updated_at).capitalize %> ago you rated this movie as <strong> <%= @current_user_rating.to_text %></strong>.
+    <% end %>
+        <p>
       <% unless @movie.ratings.empty? %>
         <h4>Top <%= pluralize(@rating_best.count, "rater") %>: </h4> 
         <ol>
-        <% @rating_best.each do |best|%>
-          <li><%= best.user.name%> with <%= best.grade %> point.
-          <% end %>
-         </ol>
-         <h4> We got <%= pluralize(@ratings.count, "rating")  %> so far: </h4>
+          <%= render "topusers", :collection => @rating_best %></ol>
+         <h4> Overall <%= pluralize(@ratings.count, "rating")  %> so far: </h4>
         <table class="ratings">
           <%= render "ratings", :collection => @ratings %>
         </table>
         <%= will_paginate @ratings %>
       <%else %>
-        Has no ratings no far.
+        <p>
+        This movie has no ratings no far.
       <%end %>
   </td>
     
@@ -27,14 +44,13 @@
       <strong>Title</strong>: <%= truncate(@movie.title,:length => 20) %><br />
       <strong>URL</strong>:  <%= link_to movie_path(@movie), @movie %><br />
       <strong>Added</strong> <%= time_ago_in_words(@movie.created_at) %> ago.<br />
-      <strong>Ratings</strong>: 0<br />
+      <strong>Ratings</strong>: <%=@movie.ratings.count %><br />
       <strong>Average rating</strong>: 0<br />
       <% if current_user.admin? %>
         admin=> <%= link_to "Delete", @movie, :method => :delete, :confirm => "Deleting movie #{@movie.title}, You sure?" %><br />
         admin=> <%= link_to "Edit", edit_movie_path(@movie) %>
       <% else %>
-        <%= mail_to "PalFlix@brunosan.eu", name= "Request edit", :subject => "Edit request for '#{@movie.title}'", :body => "#{movie_url(@movie)} \n Please specify suggested edit.\n Thanks!" %><br />
-        <%= mail_to "PalFlix@brunosan.eu", name= "Request delete", :subject => "Delete request for '#{@movie.title}'", :body => "#{movie_url(@movie)} \n Please specify reason to delete.\n Thanks" %>
+        <%= mail_to "PalFlix@brunosan.eu", name= "Report error", :subject => "Something is wrong with '#{@movie.title}'", :body => "#{movie_url(@movie)} \n Please specify suggested edit.\n Thanks!" %><br />
       <% end %>
     </td>
   </tr>

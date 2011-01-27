@@ -11,8 +11,10 @@ def new
   def show
     @movie=Movie.find(params[:id])
     @title= @movie.title
-    @rating_best= @movie.ratings.find(:all, :order => "grade", :limit => 3)
+    @rating_best= @movie.ratings.find(:all, :order => "grade DESC", :limit => 3)
     @ratings= @movie.ratings.paginate(:page => params[:page])
+    @rating=Rating.new(:user => current_user, :movie => @movie)
+    @current_user_rating=@movie.ratings.where(:user_id => current_user).first
   end
 
   def create
@@ -57,7 +59,6 @@ def destroy
   end
   
  
-private
 
 def authenticate
       deny_access unless signed_in?

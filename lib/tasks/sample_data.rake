@@ -32,21 +32,15 @@ namespace :db do
 
     end
 
-    50.times do
-      total_users=User.count
-      user=User.find(rand(total_users))
+    total_users=User.count
+    for u in 1..total_users do
+      user=User.find(u)
       total_movies=Movie.count
-      20.times do
-        user.ratings.create(:grade => rand(10), :movie_id =>rand(total_movies))
+      for m in 1..total_movies do
+        user.ratings.create!(:grade => rand(10), :movie_id =>m) if rand(3) == 1
       end
     end
 
-    #Movie.all(:limit => 5).each do |movie|
-    #  total_users=User.count
-    #  20.times do
-    #    movie.ratings.create(:grade => rand(10), :user_id =>rand(total_users))
-    #  end
-    #end
 
   end
 end

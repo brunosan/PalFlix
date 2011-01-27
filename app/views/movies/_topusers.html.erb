@@ -1,0 +1,3 @@
+<% @rating_best.each do |best|%>
+  <li><%= link_to best.user.name, best.user %> thinks it´s <strong><%= best.to_text %></strong> (<%= pluralize(best.grade,"point")%>).
+<% end %>

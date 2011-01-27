@@ -21,7 +21,7 @@ PalFlix::Application.routes.draw do
   end
   
 
-  match "/ratings", :to => "ratings#index"
+  resources :ratings, :only => [:create, :index, :index]
 
 
 
